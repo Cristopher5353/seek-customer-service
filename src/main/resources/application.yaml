@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: customer_service
+  r2dbc:
+    url: ${URL_DB}
+    username: ${USERNAME_DB}
+    password: ${PASSWORD_DB}
+
+server:
+  port: ${PORT}
+
+logging:
+  level:
+    io.r2dbc: DEBUG
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, metrics, prometheus
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    enable:
+      all: true
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+
+info:
+  app:
+    name: Customer Service
+    version: 1.0.0
+    description: Customer service Seek
