@@ -52,9 +52,9 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_84F0D43FC0DB4BF6943DD41DEA10D81F }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_963C23EA83824CE49642BC3C63A46AE8 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_9EA27337218F4E43AC040E2F37E4654B }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_225F17FBB4A24F0D8080830B01B409C8 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_C0F4C5DD919642EC9C34AC5ED474718D }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_6738CC66291B4BB89C5C2C861B77D7BB }}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
@@ -63,3 +63,4 @@ jobs:
           app-name: 'seek-service'
           slot-name: 'Production'
           package: 'customer_service-0.0.1-SNAPSHOT.jar'
+
