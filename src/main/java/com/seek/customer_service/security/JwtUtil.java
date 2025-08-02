@@ -4,13 +4,23 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import java.util.Base64;
 import java.util.Date;
 
 @Component
 public class JwtUtil {
-    private final String secret = Base64.getEncoder().encodeToString("mi-clave-super-secreta".getBytes());
+    @Value("${jwt.secret}")
+    private String secretJwt;
+
+    private String secret;
+
+    @PostConstruct
+    public void init() {
+        this.secret = Base64.getEncoder().encodeToString(secretJwt.getBytes());
+    }
 
     public String generateToken(String subject) {
         return Jwts.builder()
