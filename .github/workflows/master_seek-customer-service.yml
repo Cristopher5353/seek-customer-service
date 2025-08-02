@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy JAR app to Azure Web App - seek-customer-service
+name: Build and deploy JAR app to Azure Web App - seek-service
 
 on:
   push:
@@ -24,14 +24,17 @@ jobs:
           java-version: '17'
           distribution: 'microsoft'
 
-      - name: Build with Maven
-        run: mvn clean install
-
+      - name: Give execute permission to Gradle wrapper
+        run: chmod +x ./gradlew
+        
+      - name: Build with Gradle
+        run: ./gradlew build -x test
+        
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: java-app
-          path: '${{ github.workspace }}/target/*.jar'
+          path: 'build/libs/customer_service-0.0.1-SNAPSHOT.jar'
 
   deploy:
     runs-on: ubuntu-latest
@@ -49,15 +52,14 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_225F17FBB4A24F0D8080830B01B409C8 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_C0F4C5DD919642EC9C34AC5ED474718D }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_6738CC66291B4BB89C5C2C861B77D7BB }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_84F0D43FC0DB4BF6943DD41DEA10D81F }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_963C23EA83824CE49642BC3C63A46AE8 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_9EA27337218F4E43AC040E2F37E4654B }}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'seek-customer-service'
+          app-name: 'seek-service'
           slot-name: 'Production'
-          package: '*.jar'
-          
+          package: 'customer_service-0.0.1-SNAPSHOT.jar'
