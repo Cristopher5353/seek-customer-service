@@ -60,7 +60,8 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'seek-service'
+          app-name: 'seek-customer-service'
           slot-name: 'Production'
           package: 'customer_service-0.0.1-SNAPSHOT.jar'
+
 
