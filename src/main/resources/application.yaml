@@ -32,6 +32,11 @@ management:
 jwt:
   secret: ${JWT_SECRET}
 
+azure:
+  servicebus:
+    connection-string: ${CONNECTION_STRING}
+    queue-name: seek-queue
+
 info:
   app:
     name: Customer Service
