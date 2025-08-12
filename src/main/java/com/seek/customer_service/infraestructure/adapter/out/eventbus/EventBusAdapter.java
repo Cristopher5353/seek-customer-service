@@ -1,7 +1,6 @@
 package com.seek.customer_service.infraestructure.adapter.out.eventbus;
 
 import com.seek.customer_service.domain.port.out.EventBusRepositoryPort;
-import com.seek.customer_service.infraestructure.config.eventbus.AzureServiceBusSender;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
